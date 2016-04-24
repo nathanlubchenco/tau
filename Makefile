@@ -10,13 +10,18 @@ endef
 
 dependencies:
 	STATIC_DEPS=true pip install -Ur requirements.txt -t .
+	mkdir nltk_data
+	python -m nltk.downloader -d nltk_data punkt
+
 
 prepare: dependencies
 	rm -f lambda_bundle.zip
-	zip -r lambda_bundle *
+	rm -f lambda_haiku.zip
+	zip -r lambda_haiku *
 	make clean
 
 clean:
+	rm -rf nltk_data      
 	git clean -fd
 
 export JSON_BODY

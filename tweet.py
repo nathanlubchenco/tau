@@ -2,6 +2,7 @@ import twitter as tw
 import json
 import requests
 from textblob import TextBlob
+import nltk
 from nltk.tokenize import BlanklineTokenizer
 import random
 
@@ -14,6 +15,11 @@ def tweet_content():
 #        content = content_file.read()
     r = requests.get("http://novicevagabond.com/projects/haiku/basho.txt")
     content = r.content
+     
+    nltk.data.path.append("nltk_data/")
+    nltk.data.path.append("nltk_data/punkt")
+    nltk.data.path.append("fizzle_dizzle/")
+#    nltk.download()
 
 #print content
 
@@ -87,5 +93,6 @@ def send_tweet(event, context):
         return e.message
 
 if __name__ == '__main__':
+    nltk.data.path.append("nltk_data/")
     print send_tweet(None, None)
     #print tweet_content()
